@@ -1,7 +1,8 @@
-const button = document.getElementById('guess-button');
-const input = document.getElementById('number-input');
 const label = document.getElementById('number-label');
+const input = document.getElementById('number-input');
 const message = document.getElementById('message');
+const button = document.getElementById('guess-button');
+
 function setSecretNumber() {
     return Math.floor(Math.random() * 100) + 1;
 }
@@ -57,6 +58,7 @@ button.addEventListener('click', ()=> {
             button.classList.remove('guess-button');
             button.classList.add('new-game-button');
             button.textContent = 'Novo Jogo?';
+            input.setAttribute('disabled', 'true');
 
         }
         if (userGuess != secretNumber) {
@@ -65,6 +67,13 @@ button.addEventListener('click', ()=> {
                 message.style.color = '';
             }, 1500);
         }
-}
-    
-})
+} 
+});
+
+
+window.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && button.textContent === 'Adivinhar') {
+        e.preventDefault();
+        button.click();
+    }
+});

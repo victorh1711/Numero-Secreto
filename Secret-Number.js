@@ -7,10 +7,12 @@ function setSecretNumber() {
     return Math.floor(Math.random() * 100) + 1;
 }
 let secretNumber = setSecretNumber();
+console.log('Número secreto:', secretNumber);
 
 
 window.addEventListener('load', () => {
     if (sessionStorage.getItem('newGame') === 'true') {
+        message.style.display = 'none';
         label.textContent = 'Denovo!';
         message.style.color = 'rgb(0, 128, 0)';
         sessionStorage.removeItem('newGame');
@@ -33,26 +35,31 @@ button.addEventListener('click', ()=> {
 
             const userGuess = input.value.trim();
         if (userGuess == '') {
+            message.style.display = 'block';
             message.textContent = 'Digite algo';
             message.style.color = 'rgb(201, 46, 11)';
 
         }
         else if (userGuess < 1 || userGuess > 100) {
+            message.style.display = 'block';
             message.textContent = 'O número deve estar entre 1 e 100';
             message.style.color = 'rgb(201, 46, 11)';
         
         }
         else if (userGuess < secretNumber) {
+            message.style.display = 'block';
             message.textContent = 'tente um número maior';
             message.style.color = 'rgb(255, 140, 0)';
 
         }
         else if (userGuess > secretNumber) {
+            message.style.display = 'block';
             message.textContent = 'tente um número menor';
             message.style.color = 'rgb(255, 140, 0)';
 
         }
         else if (userGuess == secretNumber) {
+            message.style.display = 'block'
             message.textContent = 'Parabéns! Você acertou!';
             message.style.color = 'rgb(0, 128, 0)';
             button.classList.remove('guess-button');
@@ -63,6 +70,7 @@ button.addEventListener('click', ()=> {
         }
         if (userGuess != secretNumber) {
             setTimeout(() => {
+                message.style.display = 'none';
                 message.textContent = '';
                 message.style.color = '';
             }, 1500);

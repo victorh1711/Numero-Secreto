@@ -7,7 +7,7 @@ function setSecretNumber() {
     return Math.floor(Math.random() * 100) + 1;
 }
 let secretNumber = setSecretNumber();
-console.log('Número secreto:', secretNumber);
+
 
 
 window.addEventListener('load', () => {

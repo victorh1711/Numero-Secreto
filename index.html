@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Número secreto</title>
+
+    <link rel="stylesheet" href="Styles/global.css">
+    <link rel="stylesheet" href="Styles/display.css">
+    <link rel="stylesheet" href="Styles/controls.css">
+    <link rel="stylesheet" href="Styles/history.css">
+</head>
+<body>
+
+    <main class="game">
+    
+        <!-- FEEDBACK PRINCIPAL -->
+        <div class="display">
+        <div class="display__circle">
+        
+            <div class="display__arc-wrapper" id="arcWrapper">
+                <div class="display__arc" id="arc"></div>
+            </div>
+        
+            <p class="display__value" id="currentAttemp"></p>
+        
+        </div>
+        </div>
+    
+        <!-- HISTÓRICO -->
+        <section class="history" id="historyContainer">
+            <p class="history__title">Últimos</p>
+            <div class="history__list" id="historyList"></div>
+        </section>
+    
+        <!-- CONTROLE -->
+        <section class="controls">
+            <div class="controls__input-group">
+                <input 
+                    type="number"
+                    id="guessInput"
+                    class="controls__input"
+                    placeholder="Digite um número..."
+                    min="1"
+                    max="999"
+                >
+                <button id="submitButton" class="controls__button" dise>→</button>
+            </div>
+    
+            <p class="controls__message" id="feedbackMessage"></p>
+        </section>
+    
+    </main>
+    
+    <script src="JS/index.js"></script>
+    <script type="module" src="JS/validate-attemp.js"></script>
+    <script type="module" src="JS/visuals.js"></script>
+
+</body>
+</html>

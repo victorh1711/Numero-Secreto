@@ -1,0 +1,73 @@
+
+.history{
+    position: absolute;
+    position-anchor: --control;
+    bottom: calc(anchor(top) + 10px);
+    
+    width: 500px;
+    height: auto;
+    min-height: 60px;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.6);
+    
+    display: none;
+    align-items: center;
+    
+    animation: fade-in--history 0.25s ease-out forwards;
+    color: white;
+    font-weight: bolder;
+    text-indent: 10px;
+}
+.history--out{
+    animation: fade-out--history 0.2s ease-in forwards;
+}
+
+.history__title{
+    margin-right: 10px;
+}
+
+.history__item{
+    font-size: 1.3em;
+    color: white;
+    aspect-ratio: 1 / 1;
+    height: auto;
+    min-height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-indent: 0px;
+}
+
+.history__item.is-high{ background-color: var(--high-color)}
+.history__item.is-low{ background-color: var(--low-color)}
+.history__item.is-near{ background-color: var(--near-color)}
+.history__item.is-so-near { background-color: var(--soNear-color);}
+
+.history__item:first-child{
+    transform: scale(1.1);
+    opacity: 1;
+}
+.history__list{
+    gap: 10px;
+    display: flex;
+}
+
+
+@keyframes fade-in--history {
+    from{
+        transform: translateY(30px);
+        opacity: 0.9;
+    }
+    to{
+        transform: translate(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fade-out--history {
+    to{
+        transform: translateY(30px);
+        opacity: 0.9;
+    }
+}

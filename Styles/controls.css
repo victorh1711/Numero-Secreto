@@ -1,0 +1,96 @@
+.controls{
+    width: 40vw;
+    min-height: 40px;
+    height: auto;
+    padding: 15px;  
+    border-radius: 16px;
+    border: 2px solid #06b6d4;  
+    background: #ffffff;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    position: relative;
+    anchor-name: --control;
+    
+}
+
+.controls__input-group{
+    display: flex;
+    gap: 10px; 
+}
+
+
+.controls__input{
+    flex: 1;
+    padding: 12px 16px;
+    
+    border-radius: 10px;
+    border: 2px solid #ddd;
+    
+    font-size: 1.25rem;
+    outline: none;
+    transition: 0.2s;
+}
+
+.controls__input:focus{
+    border-color: #000000cc;
+}
+
+.controls__input.is-invalid {
+    animation: shake 0.3s ease-in-out forwards;
+    border-color: var(--high-color);
+}
+
+.controls__button{
+    width: 48px;
+    border-radius: 10px;
+    border: none;
+    
+    background: linear-gradient(
+      135deg,
+      #06b6d4,
+      #3b82f6
+    );
+    
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    transition: 0.2s;
+}
+.controls__button.newGame{
+
+    background: linear-gradient(
+      135deg,
+      #0aa73e,
+      #0ec74b
+    );
+}
+
+.controls__button:hover{
+    transform: scale(1.05);
+}
+
+.controls__message{
+    margin-top: 12px;
+    font-size: 0.99rem;
+    color: #000000cc;
+    font-weight: bolder;
+}
+
+.controls__message.is-high { color: var(--high-color) }
+.controls__message.is-low  { color: var(--low-color) }
+.controls__message.is-near { color: var(--near-color) }
+.controls__message.is-so-near {color: var(--soNear-color)}
+.controls__message.is-correct  { color: var(--win-color) }
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-3px); }
+  50% { transform: translateX(3px); }
+  75% { transform: translateX(-2px); }
+  100% { transform: translateX(0); }
+}
+

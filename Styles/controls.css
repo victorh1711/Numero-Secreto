@@ -70,6 +70,10 @@
     justify-content: center;
     
     transition: 0.2s;
+
+    @media (max-width: 30em) {
+        font-size: 2rem;
+    }
 }
 .controls__button.newGame{
 
@@ -89,10 +93,6 @@
     font-size: 0.99rem;
     color: #000000cc;
     font-weight: bolder;
-
-    @media (max-width: 30em) {
-        font-size: 0.9rem;
-    }
 }
 
 .controls__message.is-high { color: var(--high-color) }

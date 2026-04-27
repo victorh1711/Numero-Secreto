@@ -61,6 +61,7 @@ export function pullCurrentAttemp(attemp){
 export function winGame(){
     submitButton.classList.add("newGame")
     submitButton.textContent = "↺"
+    guessInput.disabled = true
 }
 
 function initEvents(){

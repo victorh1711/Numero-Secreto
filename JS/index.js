@@ -10,46 +10,22 @@ export const guessInput = document.getElementById("guessInput");
 export const submitButton = document.getElementById("submitButton");
 export const feedbackMessage = document.getElementById("feedbackMessage");
 
-const childs = []
 
 function getRandom() {
     return Math.floor(Math.random() * 100) + 1;
 }
-
 export let secret_num = getRandom();
 window.secret_num  = secret_num;
 
+function getLimitStorage(){
+    const root = getComputedStyle(document.documentElement);
+    const limit = root.getPropertyValue("--limit-storage").trim()
 
-function initEvents(){
-    guessInput.addEventListener("focus", () =>{
-        Visuals.show_hide__history("flex")
-    })
-    
-    guessInput.addEventListener("focusout", () =>{
-        Visuals.show_hide__history("none")
-    })
-    
-    submitButton.addEventListener("click", () =>{
-        if(submitButton.textContent == "→"){
-            const attemp = guessInput.value;
-            Val.validateGuess(attemp);
-            guessInput.value = ""
-        }
-        else{
-            location.reload()
-        }
-    })
-
-    window.addEventListener("keydown", (e) =>{
-        if(e.key === "Enter"){
-            e.preventDefault()
-            submitButton.click()
-        }
-    })
+    return Number(limit)
 }
 
-const limit_storage = 9;
-
+const limit_storage = getLimitStorage();
+const childs = []
 export function appendGuess(attemp, cls){
 
     if (childs.includes(attemp)) {
@@ -85,5 +61,33 @@ export function pullCurrentAttemp(attemp){
 export function winGame(){
     submitButton.classList.add("newGame")
     submitButton.textContent = "↺"
+}
+
+function initEvents(){
+    guessInput.addEventListener("focus", () =>{
+        Visuals.show_hide__history("flex")
+    })
+    
+    guessInput.addEventListener("focusout", () =>{
+        Visuals.show_hide__history("none")
+    })
+    
+    submitButton.addEventListener("click", () =>{
+        if(submitButton.textContent == "→"){
+            const attemp = guessInput.value;
+            Val.validateGuess(attemp);
+            guessInput.value = ""
+        }
+        else{
+            location.reload()
+        }
+    })
+
+    window.addEventListener("keydown", (e) =>{
+        if(e.key === "Enter"){
+            e.preventDefault()
+            submitButton.click()
+        }
+    })
 }
 initEvents()

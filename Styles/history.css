@@ -38,6 +38,7 @@
     height: auto;
     min-height: 35px;
     border-radius: 50%;
+    padding-bottom: 3px;
     display: flex;
     align-items: center;
     justify-content: center;

@@ -6,6 +6,8 @@
 }
 
 :root{
+    --limit-storage:  9;
+
     --theme-color: #ffffff;
 
     --high-color: #ef4444;
@@ -13,6 +15,12 @@
     --soNear-color: #ff4500;
     --near-color: #f59e0b;
     --win-color: #21b356;
+}
+
+@media (max-width: 30em) {
+    :root{
+        --limit-storage: 5;
+    }
 }
 
 body{

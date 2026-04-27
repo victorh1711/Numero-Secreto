@@ -9,6 +9,13 @@
     box-shadow: 0 4px 15px rgba(0,0,0,0.5);
     position: relative;
     anchor-name: --control;
+
+    @media (max-width: 30em) {
+        width: 95vw;
+        max-height: 200px;
+        height: auto;
+        min-height: 30px;
+    }
     
 }
 
@@ -28,6 +35,10 @@
     font-size: 1.25rem;
     outline: none;
     transition: 0.2s;
+
+    @media (max-width:30em) {
+        font-size: 1.1rem;
+    }
 }
 
 .controls__input:focus{
@@ -78,6 +89,10 @@
     font-size: 0.99rem;
     color: #000000cc;
     font-weight: bolder;
+
+    @media (max-width: 30em) {
+        font-size: 0.9rem;
+    }
 }
 
 .controls__message.is-high { color: var(--high-color) }

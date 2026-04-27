@@ -11,6 +11,10 @@
 .display__circle {
     position: relative;
     width: 350px;
+
+    @media (max-width: 30em) {
+        width: 250px;
+    }
     aspect-ratio: 1 / 1;
 }
 
@@ -101,7 +105,6 @@
       0 0 12px rgba(34,197,94,0.45),
       0 0 28px rgba(34,197,94,0.25);
 
-    transform: scale(1.05);
     animation: winPulse 0.5s ease infinite ; 
 }
 
@@ -144,6 +147,10 @@
     justify-content: center;
 
     font-size: 10rem;
+    @media (max-width: 30em) {
+        font-size: 8rem;
+    }
+    
     font-weight: bold;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 

@@ -17,6 +17,11 @@
     color: white;
     font-weight: bolder;
     text-indent: 10px;
+
+    @media (max-width: 30em) {
+        width: 90vw;
+        min-height: 40px;
+    }
 }
 .history--out{
     animation: fade-out--history 0.2s ease-in forwards;
@@ -27,7 +32,7 @@
 }
 
 .history__item{
-    font-size: 1.3em;
+    font-size: 1.3rem;
     color: white;
     aspect-ratio: 1 / 1;
     height: auto;
@@ -37,6 +42,11 @@
     align-items: center;
     justify-content: center;
     text-indent: 0px;
+
+    @media (max-width: 30em) {
+        font-size: 1rem;
+        min-height: 27px;
+    }
 }
 
 .history__item.is-high{ background-color: var(--high-color)}

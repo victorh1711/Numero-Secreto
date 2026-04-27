@@ -13,7 +13,7 @@
     width: 350px;
 
     @media (max-width: 30em) {
-        width: 250px;
+        width: 300px;
     }
     aspect-ratio: 1 / 1;
 }
@@ -148,9 +148,9 @@
 
     font-size: 10rem;
     @media (max-width: 30em) {
-        font-size: 8rem;
+        font-size: 9rem;
     }
-    
+
     font-weight: bold;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 

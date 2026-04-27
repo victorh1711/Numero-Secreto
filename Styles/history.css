@@ -19,7 +19,7 @@
     text-indent: 10px;
 
     @media (max-width: 30em) {
-        width: 90vw;
+        width: 80vw;
         min-height: 40px;
     }
 }

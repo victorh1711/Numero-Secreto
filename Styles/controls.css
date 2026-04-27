@@ -11,7 +11,7 @@
     anchor-name: --control;
 
     @media (max-width: 30em) {
-        width: 95vw;
+        width: 85vw;
         max-height: 200px;
         height: auto;
         min-height: 30px;

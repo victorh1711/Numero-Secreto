@@ -32,7 +32,6 @@ export function validateGuess(attemp) {
 
     if (attempNum === secret) {
         Global.winGame()
-        Visuals.triggerHit
         Visuals.setStateMessage("is-correct")
         Visuals.setArcState("is-correct")
 

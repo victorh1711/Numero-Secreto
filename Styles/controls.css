@@ -54,6 +54,7 @@
     width: 48px;
     border-radius: 10px;
     border: none;
+    padding: 0px 0px 5px 0px;
     
     background: linear-gradient(
       135deg,

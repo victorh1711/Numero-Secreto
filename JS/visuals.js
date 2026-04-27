@@ -43,6 +43,7 @@ export function setArcState(state) {
     
     if(state == "is-correct"){
         Global.currentAttemp.style.color = "#1d994b"
+        triggerHit()
         return
     }
     feedbackTimeout = setTimeout(() => { 

@@ -23,7 +23,8 @@
     position: absolute;
     inset: 0;
 
-    animation: rotate 12s linear infinite;
+    animation-composition: add;
+    animation: rotate 12s linear infinite, rotate--complement 1s linear alternate infinite;
 }
 
 .display__arc {
@@ -49,6 +50,7 @@
     inset: 10px;
     border-radius: 50%;
     background: var(--theme-color);
+    filter: blur(3px);
 }
 
 
@@ -105,7 +107,7 @@
       0 0 12px rgba(34,197,94,0.45),
       0 0 28px rgba(34,197,94,0.25);
 
-    animation: winPulse 0.5s ease infinite ; 
+    animation: winPulse 0.5s linear infinite ; 
 }
 
 .display__arc-wrapper.is-hit {
@@ -119,6 +121,11 @@
     to { transform: rotate(360deg); }
 }
 
+@keyframes rotate--complement {
+    from{ scale: 1;}
+    to{ transform: scale(1.009);}
+}
+
 @keyframes pulse {
     0%   { transform: scale(1); }
     50%  { transform: scale(1.08); }
@@ -130,7 +137,7 @@
         box-shadow: 0 0 0 0 rgba(10, 206, 69, 0.61);
     }
     70% {
-        box-shadow: 0 0 0 30px rgba(87, 255, 51, 0);
+        box-shadow: 0 0 10px 10px rgba(87, 255, 51, 0);
     }
     100% {
         box-shadow: 0 0 0 0 rgba(87, 255, 51, 0);
@@ -147,17 +154,16 @@
     justify-content: center;
 
     font-size: 10rem;
+    
+    font-weight: bold;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    
+    opacity: 0.9;
+    color: #222;
+    
     @media (max-width: 30em) {
         font-size: 9rem;
     }
-
-    font-weight: bold;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-
-    opacity: 0.9;
-    color: #222;
-
-
 }
 .display__value.is-hit {
     animation: pulse 0.4s ease;

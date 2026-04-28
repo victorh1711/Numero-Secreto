@@ -54,8 +54,7 @@
     width: 48px;
     border-radius: 10px;
     border: none;
-    padding: 0px 0px 5px 0px;
-    
+    padding-bottom: 5px;
     background: linear-gradient(
       135deg,
       #06b6d4,
@@ -76,12 +75,20 @@
         font-size: 2rem;
     }
 }
-.controls__button.newGame{
+.controls__button.newGame--win{
 
     background: linear-gradient(
       135deg,
       #0aa73e,
       #0ec74b
+    );
+}
+.controls__button.newGame--lose{
+
+    background: linear-gradient(
+      135deg,
+      #a70a0a,
+      #c7480e
     );
 }
 

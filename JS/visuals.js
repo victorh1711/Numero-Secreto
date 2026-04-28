@@ -1,6 +1,6 @@
 import * as Global from './index.js'
 
-export function show_hide__history(disp){
+export function showHide_History(disp){
     if(disp == "flex"){
         Global.historyContainer.style.display = "flex"
     }
@@ -69,4 +69,10 @@ export function shakeInput(){
 
         Global.guessInput.classList.remove("is-invalid")
     }, 400);
+}
+
+export function styleButton_endGame(gameResult){
+    Global.submitButton.classList.add(gameResult)
+    Global.submitButton.textContent = "↺"
+    Global.guessInput.disabled = true
 }

@@ -1,84 +1,62 @@
 import * as Global from './index.js'
 import * as Visuals from './visuals.js'
-
+import * as Game from './game.js'
 
 export function validateGuess(attemp) {
-    const secret = Global.secret_num;
+    const secret = Game.secret_num;
     const msg = Global.feedbackMessage;
     const attempNum = Number(attemp.trim());
     const diff = Math.abs(secret - attempNum);
 
-
-    if (attemp.trim() === "") {
-        Visuals.shakeInput()
-        msg.className = "controls__message"
-        return msg.textContent = "Digite algo...";
-    }
-    
-
-    if(attempNum > 100 || attempNum < 0){
-        Visuals.shakeInput()
-        msg.className = "controls__message"
-        return msg.textContent = "Número inválido...";
+    // --- 1. Validações de Erro (Input Inválido) ---
+    if (attemp.trim() === "" || isNaN(attempNum) || attempNum <= 0 || attempNum > 100) {
+        Visuals.shakeInput();
+        msg.className = "controls__message";
+        
+        if (attemp.trim() === "") return msg.textContent = "Digite algo...";
+        if (attempNum === 0) return msg.textContent = "0 é inválido...";
+        return msg.textContent = "Número inválido (1-100)...";
     }
 
-
-    if (attempNum === 0) {
-        Visuals.shakeInput()
-        msg.className = "controls__message"
-        return msg.textContent = "0 é inválido...";
-    }
-
-
+    // --- 2. Lógica de Acerto ---
     if (attempNum === secret) {
-        Global.winGame()
-        Visuals.setStateMessage("is-correct")
-        Visuals.setArcState("is-correct")
-
-        Global.pullCurrentAttemp(attemp)
+        Visuals.styleButton_endGame("newGame--win");
+        Visuals.setStateMessage("is-correct");
+        Visuals.setArcState("is-correct");
+        Game.pullCurrentAttemp(attemp);
         return msg.textContent = "Correto!";
     }
 
-   
+    // --- 3. Lógica de Erro (Palpites Próximos ou Longe) ---
+    // Atalhos para evitar repetição excessiva de código visual
+    Visuals.triggerHit(Global.arcWrapper);
+
+    let state = "";
+    let feedback = "";
+
     if (diff < 5) {
-        Visuals.triggerHit(Global.arcWrapper)
-        Visuals.setStateMessage("is-so-near")
-        Visuals.setArcState("is-near")
-
-        Global.pullCurrentAttemp(attemp)
-        Global.appendGuess(attemp, "is-so-near")
-        return msg.textContent = "Muito perto...";
+        state = "is-so-near";
+        feedback = "Muito perto...";
+        Visuals.setArcState("is-near"); // Mantém o estado visual do arco
     } 
-
-
-    if (diff < 15) {
-        Visuals.triggerHit(Global.arcWrapper)
-        Visuals.setStateMessage("is-near")
-        Visuals.setArcState("is-near")
-
-        Global.pullCurrentAttemp(attemp)
-        Global.appendGuess(attemp, "is-near")
-        return msg.textContent = "Quase lá...";
-    }
-
-
-    if (attempNum < secret) {
-        Visuals.triggerHit(Global.arcWrapper)
-        Visuals.setStateMessage("is-low");
-        Visuals.setArcState("is-low")
-
-        Global.pullCurrentAttemp(attemp)
-        Global.appendGuess(attemp, "is-low")
-        return msg.textContent = "O número secreto é maior...";
-    }
+    else if (diff < 15) {
+        state = "is-near";
+        feedback = "Quase lá...";
+        Visuals.setArcState("is-near");
+    } 
+    else if (attempNum < secret) {
+        state = "is-low";
+        feedback = "O número secreto é maior...";
+        Visuals.setArcState("is-low");
+    } 
     else {
-        Visuals.triggerHit(Global.arcWrapper)
-        Visuals.setArcState("is-high")
-        Visuals.setStateMessage("is-high");
+        state = "is-high";
+        feedback = "O número secreto é menor...";
+        Visuals.setArcState("is-high");
+    }
 
-        Global.appendGuess(attemp, "is-high")
-        Global.pullCurrentAttemp(attemp)
-        return msg.textContent = "O número secreto é menor...";
-    } 
-
+    // Executa as ações comuns para erros de palpite
+    Visuals.setStateMessage(state);
+    Game.historyAppendAttemp(attemp, state);
+    return msg.textContent = feedback;
 }

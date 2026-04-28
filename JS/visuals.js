@@ -1,21 +1,5 @@
 import * as Global from './index.js'
 
-export function showHide_History(disp){
-    if(disp == "flex"){
-        Global.historyContainer.style.display = "flex"
-    }
-
-    if(disp == "none"){
-        Global.historyContainer.classList.toggle("history--out");
-
-        setTimeout(() => {
-
-            Global.historyContainer.classList.remove("history--out")  
-            Global.historyContainer.style.display = "none"
-        }, 200);
-    }
-}
-
 export const STATUS = {
     LOW: "is-low",
     HIGH: "is-high",
@@ -24,55 +8,78 @@ export const STATUS = {
     CORRECT: "is-correct",
 };
 
+// --- Funções de Estado ---
 
 export const setStateMessage = (cls) => {
     const msg = Global.feedbackMessage;
-
     msg.classList.remove(...Object.values(STATUS));
     msg.classList.add(cls);
 };
 
-
-let feedbackTimeout;
+let arcTimeout;
 export function setArcState(state) {
-    Global.arc.classList.remove(...Object.values(STATUS));
-    Global.arc.classList.add(state);
-
-    clearTimeout(feedbackTimeout);
-
+    const { arc, currentAttemp } = Global;
     
-    if(state == "is-correct"){
-        Global.currentAttemp.style.color = "#1d994b"
-        triggerHit()
-        return
+    // Reset de classes usando o objeto STATUS
+    arc.classList.remove(...Object.values(STATUS));
+    arc.classList.add(state);
+
+    clearTimeout(arcTimeout);
+
+    if (state === STATUS.CORRECT) {
+        currentAttemp.style.color = "#1d994b";
+        triggerHit();
+        return;
     }
-    feedbackTimeout = setTimeout(() => { 
-        Global.arc.classList.remove(state);
+
+    // Remove a classe após o feedback visual, exceto se for acerto
+    arcTimeout = setTimeout(() => { 
+        arc.classList.remove(state);
     }, 500);
-    
 }
+
+// --- Animações e Feedback ---
 
 export function triggerHit() {
-    Global.arcWrapper.classList.add("is-hit");
-    Global.currentAttemp.classList.add("is-hit")
+    const elements = [Global.arcWrapper, Global.currentAttemp];
+    
+    elements.forEach(el => el.classList.add("is-hit"));
 
     setTimeout(() => {
-      Global.arcWrapper.classList.remove("is-hit");
-      Global.currentAttemp.classList.remove("is-hit")
+        elements.forEach(el => el.classList.remove("is-hit"));
     }, 400);
 }
 
-export function shakeInput(){
-    Global.guessInput.classList.add("is-invalid")
+export function shakeInput() {
+    const input = Global.guessInput;
+    input.classList.add("is-invalid");
 
     setTimeout(() => {
-
-        Global.guessInput.classList.remove("is-invalid")
+        input.classList.remove("is-invalid");
     }, 400);
 }
 
-export function styleButton_endGame(gameResult){
-    Global.submitButton.classList.add(gameResult)
-    Global.submitButton.textContent = "↺"
-    Global.guessInput.disabled = true
+// --- Interface e Fluxo ---
+
+export function showHide_History(isVisible) {
+    const container = Global.historyContainer;
+
+    if (isVisible) {
+        container.style.display = "flex";
+    } else {
+        container.classList.add("history--out");
+        
+        setTimeout(() => {
+            container.style.display = "none";
+            container.classList.remove("history--out");
+        }, 200);
+    }
+}
+
+export function styleButton_endGame(gameResultCls) {
+    const { submitButton, guessInput } = Global;
+    
+    submitButton.classList.add(gameResultCls);
+    submitButton.textContent = "↺";
+    guessInput.disabled = true;
 }

@@ -54,7 +54,7 @@
     width: 48px;
     border-radius: 10px;
     border: none;
-    padding-bottom: 5px;
+    padding: 8px 12px;
     background: linear-gradient(
       135deg,
       #06b6d4,
@@ -68,8 +68,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 6px; 
     
     transition: 0.2s;
+
 
     @media (max-width: 30em) {
         font-size: 2rem;

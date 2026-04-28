@@ -13,9 +13,11 @@ export function validateGuess(attemp) {
         Visuals.shakeInput();
         msg.className = "controls__message";
         
-        if (attemp.trim() === "") return msg.textContent = "Digite algo...";
-        if (attempNum === 0) return msg.textContent = "0 é inválido...";
-        return msg.textContent = "Número inválido (1-100)...";
+        if (attemp.trim() === "") msg.textContent = "Digite algo...";
+        else if (attempNum === 0) msg.textContent = "0 é inválido...";
+        else msg.textContent = "Número inválido (1-100)...";
+
+        return false
     }
 
     // --- 2. Lógica de Acerto ---
@@ -58,5 +60,6 @@ export function validateGuess(attemp) {
     // Executa as ações comuns para erros de palpite
     Visuals.setStateMessage(state);
     Game.historyAppendAttemp(attemp, state);
-    return msg.textContent = feedback;
+    msg.textContent = feedback;
+    return true
 }

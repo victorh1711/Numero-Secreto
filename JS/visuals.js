@@ -1,4 +1,5 @@
 import * as Global from './index.js'
+import * as Game from './game.js'
 
 export const STATUS = {
     LOW: "is-low",
@@ -76,10 +77,27 @@ export function showHide_History(isVisible) {
     }
 }
 
-export function styleButton_endGame(gameResultCls) {
+export function endGame(gameResult) {
+
     const { submitButton, guessInput } = Global;
     
-    submitButton.classList.add(gameResultCls);
+    if(gameResult == "lose"){
+        setStateMessage("is-high");
+        Global.currentAttemp.style.color = "#ef4444";
+        Global.arc.classList.add("is-high");
+        
+        Global.currentAttemp.style.fontSize = "6em";
+        Global.currentAttemp.textContent = "Lose!";
+        Global.feedbackMessage.textContent = `Fim de jogo! Era o número ${secret_num}`;
+        Global;
+    }
+
+    if(gameResult == "win"){
+        setStateMessage("is-correct");
+        setArcState("is-correct");
+    }
+
+    submitButton.classList.add(gameResult);
     submitButton.textContent = "↺";
     guessInput.disabled = true;
 }

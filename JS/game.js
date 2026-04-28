@@ -1,8 +1,9 @@
 import * as Global from './index.js';
 import * as Visuals from './visuals.js';
 
+
 // --- Estado do Jogo ---
-const gameStates = {
+export const gameStates = {
     attempCount: 0,
     maxAttemps: 10,
     history: []
@@ -13,6 +14,7 @@ function getRandom() {
 }
 
 export const secret_num = getRandom();
+window.secret_num = secret_num
 
 
 // --- Helpers ---
@@ -24,15 +26,14 @@ export function getLimitStorage() {
 
 // --- Lógica de Negócio ---
 export function addAttemp(attemp) {
-    if (Global.guessInput.disabled) return;
+    if (Global.guessInput.disabled && Number(attemp) !== secret_num) return;
 
     gameStates.attempCount++;
     Global.currentAttemp.textContent = attemp;
 
     
     if (gameStates.attempCount >= gameStates.maxAttemps && Number(attemp) !== secret_num) {
-        Visuals.styleButton_endGame("newGame--lose");
-        Global.feedbackMessage.textContent = `Fim de jogo! Era o número ${secret_num}`;
+        Visuals.endGame("lose")
     }
 }
 
@@ -67,3 +68,14 @@ function createHistoryElement(attemp, cls) {
     historyItem.appendChild(pullAttemp);
     return historyItem;
 }
+
+export function updateTries() {
+    Global.leftTries.textContent = gameStates.maxAttemps - gameStates.attempCount;
+
+    Global.leftTries.classList.add("is-changing");
+
+    setTimeout(() => {
+      Global.leftTries.classList.remove("is-changing");
+    }, 250);
+}
+Global.leftTries.textContent = gameStates.maxAttemps

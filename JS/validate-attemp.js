@@ -22,10 +22,8 @@ export function validateGuess(attemp) {
 
     // --- 2. Lógica de Acerto ---
     if (attempNum === secret) {
-        Visuals.styleButton_endGame("newGame--win");
-        Visuals.setStateMessage("is-correct");
-        Visuals.setArcState("is-correct");
-        Game.pullCurrentAttemp(attemp);
+        Visuals.endGame("win")
+        Game.addAttemp(attemp);
         return msg.textContent = "Correto!";
     }
 

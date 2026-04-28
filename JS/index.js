@@ -10,6 +10,7 @@ export const historyContainer = document.getElementById("historyContainer");
 export const historyList = document.getElementById("historyList");
 export const guessInput = document.getElementById("guessInput");
 export const submitButton = document.getElementById("submitButton");
+export const leftTries = document.getElementById("leftTries")
 export const feedbackMessage = document.getElementById("feedbackMessage");
 
 // --- Estado Global ---
@@ -43,10 +44,9 @@ function initEvents() {
         // SÓ executamos a lógica do jogo se for válido
         if (isValid) {
             Game.addAttemp(attemp);
+            Game.updateTries()
             guessInput.value = "";
         }
-        
-        guessInput.focus();
     });
 
     // Atalho Enter

@@ -10,7 +10,7 @@
     position: relative;
     anchor-name: --control;
 
-    @media (max-width: 30em) {
+    @media (max-width: 40em) {
         width: 85vw;
         max-height: 200px;
         height: auto;
@@ -36,7 +36,7 @@
     outline: none;
     transition: 0.2s;
 
-    @media (max-width:30em) {
+    @media (max-width:40em) {
         font-size: 1.1rem;
     }
 }
@@ -54,7 +54,6 @@
     width: 48px;
     border-radius: 10px;
     border: none;
-    padding: 8px 12px;
     background: linear-gradient(
       135deg,
       #06b6d4,
@@ -68,30 +67,32 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 6px; 
+    flex-direction: column;
+    gap: 0px;
     
     transition: 0.2s;
 
 
-    @media (max-width: 30em) {
+    @media (max-width: 40em) {
         font-size: 2rem;
     }
 }
-.controls__button.newGame--win{
 
-    background: linear-gradient(
-      135deg,
-      #0aa73e,
-      #0ec74b
-    );
+.controls__button.win{background: linear-gradient( 135deg,#0aa73e,#0ec74b);}
+.controls__button.lose{background: linear-gradient(135deg, #ef4444, #c53030);}
+
+.tries{
+    font-size: 1.2rem;
+    opacity: 0.9;
 }
-.controls__button.newGame--lose{
+.tries.is-changing {
+  animation: pop 0.25s ease;
+}
 
-    background: linear-gradient(
-      135deg,
-      #a70a0a,
-      #c7480e
-    );
+@keyframes pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.4); }
+  100% { transform: scale(1); }
 }
 
 .controls__button:hover{
